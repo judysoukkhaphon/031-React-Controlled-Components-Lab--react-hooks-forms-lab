@@ -5,20 +5,28 @@ import Item from "./Item";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  // setSelectedCategory -> Filter
+  // selectedCategory -> Item
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
-  }
+  } //Filter
 
   const itemsToDisplay = items.filter((item) => {
     if (selectedCategory === "All") return true;
+    return item.category === selectedCategory; 
+  }); //Item
 
-    return item.category === selectedCategory;
-  });
+  const [itemarray, setArray] = useState(items);
+
+  function addElement(itemObject){
+    setArray(itemarray.push(itemObject));
+    console.log(itemObject.name);
+  }
 
   return (
     <div className="ShoppingList">
-      <ItemForm />
+      <ItemForm onItemFormSubmit = {addElement}/>
       <Filter onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (

@@ -1,0 +1,26 @@
+1. In Filter component, there is a new <input> field. Items should be filtered by matching text.
+    - Determine where state is needed.
+    - What components need to know about the text?
+    - set up initial state and connect it to the input field.
+    - make sure you're creating a controlled form, so the inputs value should always be in sync with state.
+    - set state when the input changes. You'll need to use a prop called "onSearchChange" as a callback to pass the tests.
+    - use the state value to determine which items are displayed
+
+2. In ItemForm which allows us to add new items to our shopping list.
+    - when the form is submitted, a new item should be created and added to our list.
+    - Make all input fields controlled inputs, so they are accessibly via state.
+    - when setting the initial state for <select> use a value of "Produce"
+    - Handle the forms submit event, from the data saved in state create a new item object with the following properties:
+        const newItem = {
+            id: uuid(), // uuid library used to generate a unique id
+            name: itemName,
+            category: itemCategory,
+        };
+    - Add the new item to the list by updating the state. You'll need to use a prop called "onItemFormSubmit" as a callback, and pass the new item to it.
+
+    Note: To add a new element to an array in state, use the spread operator:
+        function addElement(element) {
+            setArray([...array, element]);
+        }
+
+    (When you're working with state, it's important to pass a  n e w  array to the state setter function instead of mutating the original)
