@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
-import App from "./App";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -28,7 +27,11 @@ function ShoppingList({ items }) {
   if (selectedCategory === "All" && searchText === "") return true;
   if(item.category === selectedCategory || selectedCategory==="All"){
       return(item.name.toLowerCase().match(searchText));
-    };
+  }
+  else{
+    return false;
+  }
+
     })
   
 
