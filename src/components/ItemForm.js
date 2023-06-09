@@ -1,4 +1,4 @@
-// Make all input fields controlled inputs. Meaning, parent should handle state.
+// Make all input fields controlled inputs. Meaning all form data must be stored in state.
 // This should send data back to ShoppingList which then sends it to App which will add it to items.js (DB)
 // handle submit event and use data saved in state.
 
@@ -8,30 +8,23 @@ import { v4 as uuid } from "uuid";
 // accepts props from ShoppingList
 function ItemForm(props) {
 
-function createNewItem(event){
-  event.preventDefault();
-  const newItem = {
-    id: uuid(), 
-    name: event.target[0].value,
-    category: event.target[1].value,
-  };
-  console.log(newItem);
-  props.onItemFormSubmit(newItem);
-  return newItem;}
-
-
+const newItem = {
+  id: uuid(),
+  name: props.name,
+  category: props.category
+}
 
 
   return (
-    <form className="NewItem" onSubmit={createNewItem}>
+    <form className="NewItem" onSubmit={props.onItemFormSubmit.bind(this, newItem)}>
       <label>
         Name:
-        <input type="text" name="name" />
+        <input type="text" name="name" onChange = {props.onTextChange}/>
       </label>
 
       <label>
         Category:
-        <select name="category">
+        <select name="category" value={this} onChange = {props.onCategoryChange}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>

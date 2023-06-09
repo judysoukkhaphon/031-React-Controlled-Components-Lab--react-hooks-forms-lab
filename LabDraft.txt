@@ -24,3 +24,68 @@
         }
 
     (When you're working with state, it's important to pass a  n e w  array to the state setter function instead of mutating the original)
+------------------------------------------------------------------------
+"App" imports ShoppingList, Header, and ItemData (database)
+
+Components with state:
+((items = useState(itemData), but "setItems" isn't used.))
+
+"ShoppingList"is passed state-var 'items'
+
+"Header" is passed state-var for 'isDarkMode'. State is intialized in App. (does not import {useState})
+
+
+--------------------------------------------------------
+
+"ShoppingList" handles what's displayed.
+imports {useState}, "ItemForm", "Filter", and "Item":
+	Takes {items} prop from App.
+	Only has a state-var, {selectedCategory}, for dropdown menu.
+	Passes callback {'handleCategoryChange'} to Filter.
+	{itemsToDisplay} holds filtered 'items'
+	Passes mapped {'itemsToDisplay'} to 'Item' component, {name} and {category}.
+
+'Item' handles UI button to add/remove items using a {isInCart} state-var.
+	Takes {item.name} and {item.category} from 'ShoppingList' (just for display)
+	Has a state-var, {isInCart} to handle button clicks to switch between in-cart/not-in-cart
+
+"Header" Handles light/dark theme. 
+	App passes state, {isDarkMode}, and a callback, {onDarkModeClick}.
+
+"ItemForm" allows user to add a new item to the list, by entering a name in text field, and selected a category from the dropdown. This new item should be added to the "items.js" database.
+
+"Filter" Handles how to filter items. In previous labs, there was only a dropdown option to filter by category. Now, there is an added <input> field to filter names by text.
+
+
+-----------------------------------------------------------
+"ShoppingList" sends callback handleCategoryChange() to "Filter",
+	which returns {selectedCategory} back to "ShoppingList"
+	which is used to populate {itemsToDisplay}, which is used to pass data to "Item"
+
+"ShoppingList" imports "ItemForm" which allows user to create a new item to add to items.js database.
+"ShoppingList" returns <ItemForm /> but doesn't pass any props to it, right now.
+
+"App" sends theme to "Header".
+
+ItemForm goes to items.js database.
+
+------------------------------------------------------------
+Parent creates the setter-function that sets the state. 
+	the setter-function is passed to the child to be invoked there.
+	the state-var can be passed to the child to use, but it's state is determined in the parent.
+Child uses the setter-function, and optionally can use the state-var. 
+state-var is updated in both components since it's set in the parent and passed to the child.
+------------------------------------------------------------
+FROM TESTS:
+Filter 		calls the callback prop called {onSearchChange}
+		should "use a prop of {search} to display search term in the input field" (???)
+		shopping filters based on the search term for full and partial matches
+
+ItemForm	calls the callback prop called {onItemFormSubmit}
+		adds a new item to the list when the form is submitted
+
+
+
+    ------------------------------------------------
+    You can write an event listener function to take 2 arguments but is only passed 1, bc the function called on an event automatically passes the event
+    See about bind() to pass arguments to a function that you don't want to call yet (since the parenthesis you put the arguments in, makes the call to the function)

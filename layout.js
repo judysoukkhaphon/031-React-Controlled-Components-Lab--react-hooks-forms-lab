@@ -8,11 +8,6 @@ let item={
 
 let category = item.category;
 
-
-
-
-
-
 function app(){
     const allItems = items.items;
     let theme;
