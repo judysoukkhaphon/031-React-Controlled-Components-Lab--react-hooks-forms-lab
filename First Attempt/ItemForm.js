@@ -2,43 +2,29 @@
 // This should send data back to ShoppingList which then sends it to App which will add it to items.js (DB)
 // handle submit event and use data saved in state.
 
-import React, {useState} from "react";
+import React from "react";
 import { v4 as uuid } from "uuid";
 
-function ItemForm({onItemFormSubmit}) {
+// accepts props from ShoppingList
+function ItemForm(props) {
 
-const [name, setName] = useState("");
-const [category, setCategory] = useState("Produce");
-
-function handleNameChange(event){
-  setName(event.target.value);
-}
-
-function handleCategoryChange(event){
-  setCategory(event.target.value);
-}
-
-function handleSubmit(event){
-  event.preventDefault();
-  onItemFormSubmit({
-    id: uuid(),
-    name,
-    category
-  })
-
+const newItem = {
+  id: uuid(),
+  name: props.name,
+  category: props.category
 }
 
 
   return (
-    <form className="NewItem" onSubmit={handleSubmit}>
+    <form className="NewItem" onSubmit={props.onItemFormSubmit.bind(this, newItem)}>
       <label>
         Name:
-        <input type="text" name="name" onChange = {handleNameChange}/>
+        <input type="text" name="name" onChange = {props.onTextChange}/>
       </label>
 
       <label>
         Category:
-        <select name="category" value={this} onChange = {handleCategoryChange}>
+        <select name="category" value={this} onChange = {props.onCategoryChange}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>

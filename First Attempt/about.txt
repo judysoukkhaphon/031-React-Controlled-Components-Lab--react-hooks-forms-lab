@@ -1,0 +1,6 @@
+Lab only required changes to:
+    Shoppinglist.js
+    Filter.js
+    ItemForm.js
+
+App works exactly as it should but fails the tests. So I am saving the work I've done in these files as a reference for an alternative solution. 
